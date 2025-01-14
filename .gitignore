@@ -38,4 +38,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-/src/main/java/fr/boubou/valorant4j/Main.java
+/src/main/java/dev/boubou/valorant4j/Main.java
