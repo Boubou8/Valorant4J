@@ -1,5 +1,9 @@
 jdk:
   - openjdk20
 before_install:
-  - sdk install java 20.3.0.r11-grl
-  - sdk use java 20.3.0.r11-grl
+  - sdk install java 20.0.2-tem
+  - sdk use java 20.0.2-tem
+  - sdk install maven
+  - mvn -v
+install:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
