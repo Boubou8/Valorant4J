@@ -7,6 +7,7 @@
     <groupId>fr.boubou</groupId>
     <artifactId>Valorant4J</artifactId>
     <version>0.1.0-alpha</version>
+    <packaging>jar</packaging>
     <name>Valorant API Wrapper</name>
     <description>Java wrapper for the Valorant API (unofficial) by Henrik Systems</description>
 
