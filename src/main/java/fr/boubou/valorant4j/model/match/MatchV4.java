@@ -1,6 +1,5 @@
 package fr.boubou.valorant4j.model.match;
 
-import dev.boubou.valorant4j.model.match.v4.*;
 import fr.boubou.valorant4j.model.match.v4.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
