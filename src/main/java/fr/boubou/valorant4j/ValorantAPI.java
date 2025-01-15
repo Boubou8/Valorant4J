@@ -3,11 +3,15 @@ package fr.boubou.valorant4j;
 import fr.boubou.valorant4j.builder.MatchHistoryBuilder;
 import fr.boubou.valorant4j.builder.MmrRequestBuilder;
 import fr.boubou.valorant4j.exceptions.ApiException;
+import fr.boubou.valorant4j.model.ValorantAccount;
 import fr.boubou.valorant4j.model.ValorantMatch;
 import fr.boubou.valorant4j.model.ValorantMmr;
+import fr.boubou.valorant4j.model.account.AccountV1;
+import fr.boubou.valorant4j.model.account.AccountV2;
 import fr.boubou.valorant4j.model.match.MatchBase;
 import fr.boubou.valorant4j.model.match.MatchV2;
 import fr.boubou.valorant4j.model.match.MatchV4;
+import fr.boubou.valorant4j.route.AccountService;
 import fr.boubou.valorant4j.route.MatchService;
 import fr.boubou.valorant4j.util.ApiVersion;
 import lombok.Getter;
@@ -20,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 10/11/2024 18:52
  */
 
@@ -34,20 +38,17 @@ public class ValorantAPI {
     private int maxRequestsPerMinute;
     private boolean rateLimitEnabled;
 
-    // Constructeur standard avec la clé API comme paramètre obligatoire
     public ValorantAPI(String apiKey) {
         this.apiKey = apiKey;
         this.maxRequestsPerMinute = 30;
         this.rateLimitEnabled = true;
     }
 
-    // Méthode fluide pour configurer le rate limit
     public ValorantAPI setMaxRateLimit(int maxRequestsPerMinute) {
         this.maxRequestsPerMinute = maxRequestsPerMinute;
         return this;
     }
 
-    // Méthode fluide pour activer ou désactiver le rate limit
     public ValorantAPI manageRateLimit(boolean rateLimitEnabled) {
         this.rateLimitEnabled = rateLimitEnabled;
         return this;
@@ -59,6 +60,20 @@ public class ValorantAPI {
         return this;
     }
 
+    public ValorantAccount fetchAccountByNameTag(String name, String tag) throws ApiException {
+        final AccountV1 accountV1 = (AccountV1) new AccountService(this, ApiVersion.V1).fetchByNameTag(name, tag);
+        final AccountV2 accountV2 = (AccountV2) new AccountService(this, ApiVersion.V2).fetchByNameTag(name, tag);
+
+        return new ValorantAccount(accountV1, accountV2);
+    }
+
+    public ValorantAccount fetchAccountByPuuid(String puuid) throws ApiException {
+        final AccountV1 accountV1 = (AccountV1) new AccountService(this, ApiVersion.V1).fetchByPuuid(puuid);
+        final AccountV2 accountV2 = (AccountV2) new AccountService(this, ApiVersion.V2).fetchByPuuid(puuid);
+
+        return new ValorantAccount(accountV1, accountV2);
+    }
+
     public ValorantMatch fetchMatch(String matchId) {
         final MatchV2 matchV2 = (MatchV2) new MatchService(this, ApiVersion.V2).fetchByMatchId(matchId);
         final MatchV4 matchV4 = (MatchV4) new MatchService(this, ApiVersion.V4).fetchByMatchId(matchId);
@@ -66,21 +81,13 @@ public class ValorantAPI {
         return new ValorantMatch(matchV2, matchV4);
     }
 
-    public ValorantMatch fetchMatchFromVersion(String matchId, ApiVersion version) throws UnsupportedOperationException {
+    public ValorantMatch fetchMatch(String matchId, ApiVersion version) throws UnsupportedOperationException {
         final MatchBase match = new MatchService(this, version).fetchByMatchId(matchId);
         return switch (version) {
             case V2 -> new ValorantMatch((MatchV2) match, null);
             case V4 -> new ValorantMatch(null, (MatchV4) match);
-            default -> throw new UnsupportedOperationException("Version non supportée : " + version);
+            default -> throw new UnsupportedOperationException("Unsupported API version: " + version);
         };
-    }
-
-    public MatchHistoryBuilder matchHistoryBuilder() {
-        return new MatchHistoryBuilder();
-    }
-
-    public MmrRequestBuilder mmrRequestBuilder() {
-        return new MmrRequestBuilder();
     }
 
     public List<ValorantMatch> fetchMatchHistoryByNameTag(String region, String platform, String name, String tag, int size) throws ApiException {
@@ -113,9 +120,6 @@ public class ValorantAPI {
                 .fetch(this);
     }
 
-    /**
-     * Récupère les informations MMR par PUUID.
-     */
     public ValorantMmr fetchMmrByPuuid(@NonNull String region, @NonNull String platform, @NonNull String puuid, @Nullable String season, @Nullable ApiVersion version) throws ApiException {
         return mmrRequestBuilder()
                 .region(region)
@@ -124,5 +128,14 @@ public class ValorantAPI {
                 .season(season)
                 .apiVersion(version)
                 .fetch(this);
+    }
+
+
+    public MatchHistoryBuilder matchHistoryBuilder() {
+        return new MatchHistoryBuilder();
+    }
+
+    public MmrRequestBuilder mmrRequestBuilder() {
+        return new MmrRequestBuilder();
     }
 }

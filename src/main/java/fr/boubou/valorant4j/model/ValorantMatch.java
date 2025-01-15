@@ -17,7 +17,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 10/01/2025 19:10
  */
 @Slf4j

@@ -1,12 +1,11 @@
 package fr.boubou.valorant4j.model.match.v4;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.annotation.Nullable;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 20/11/2024 18:18
  */
 

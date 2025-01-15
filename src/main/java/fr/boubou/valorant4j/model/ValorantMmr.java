@@ -5,7 +5,7 @@ import fr.boubou.valorant4j.model.mmr.MmrV3;
 import lombok.Getter;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 14/01/2025 14:42
  */
 public class ValorantMmr {

@@ -8,7 +8,7 @@ import lombok.Getter;
 import java.util.Set;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 10/11/2024 23:17
  */
 public  class Endpoint {
@@ -52,6 +52,6 @@ public  class Endpoint {
 
     protected void handleApiError(JsonNode response) throws ApiException {
         String message = response.path("message").asText();
-        throw new ApiException("Erreur lors de l'appel à l'API : " + message);
+        throw new ApiException("Henrick's API error: " + message);
     }
 }

@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 16/11/2024 18:07
  */
 

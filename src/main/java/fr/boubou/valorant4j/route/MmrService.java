@@ -10,18 +10,11 @@ import fr.boubou.valorant4j.parser.factory.ValorantMmrParserFactory;
 import fr.boubou.valorant4j.util.ApiVersion;
 import fr.boubou.valorant4j.util.Endpoint;
 import fr.boubou.valorant4j.util.HttpService;
-
 import java.util.Set;
 
 /**
- * Service permettant de récupérer les informations MMR via les endpoints V2 et V3.
- * Endpoints disponibles :
- * - par name/tag
- * - par puuid
- * La query "season" est disponible uniquement pour la version V2.
- *
- * @author Lubin
- * @date 10/11/2024
+ * @author Boubou
+ * @date 10/11/2024 23:00
  */
 public class MmrService extends Endpoint {
 
@@ -33,9 +26,6 @@ public class MmrService extends Endpoint {
         this.httpService = new HttpService(api.getMaxRequestsPerMinute(), api.isRateLimitEnabled());
     }
 
-    /**
-     * Effectue une requête MMR en utilisant un builder pour construire l'endpoint.
-     */
     public MmrBase fetch(MmrRequestBuilder builder) throws ApiException {
         String endpoint = builder.buildEndpoint(version);
         return fetchMmr(endpoint);

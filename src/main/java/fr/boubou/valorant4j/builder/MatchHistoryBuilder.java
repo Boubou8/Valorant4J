@@ -8,13 +8,18 @@ import fr.boubou.valorant4j.route.MatchlistService;
 import fr.boubou.valorant4j.util.ApiVersion;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-
 import java.time.Instant;
 import java.util.List;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 12/01/2025 02:22
+ *
+ * @en-description
+ * Builder for fetching match history
+ *
+ * @fr-description
+ * Builder pour récupérer l'historique des parties
  */
 
 @Setter
@@ -37,37 +42,22 @@ public class MatchHistoryBuilder {
     private Instant startTime;
 
     public List<ValorantMatch> fetch(ValorantAPI api) throws ApiException {
-        // Crée un service spécifique
-        MatchlistService service = new MatchlistService(api, apiVersion);
+        validateParameters();
 
-        // Construit l’endpoint selon name/tag ou puuid
-        if (puuid != null) {
-            // fetch par PUUID
-            return service.fetchMatchesByPuuid(
-                    region,
-                    platform,
-                    puuid,
-                    mode,
-                    map,
-                    size,
-                    start,
-                    startTime
-            );
-        } else if (name != null && tag != null) {
-            // fetch par Name/Tag
-            return service.fetchMatchesByNameTag(
-                    region,
-                    platform,
-                    name,
-                    tag,
-                    mode,
-                    map,
-                    size,
-                    start,
-                    startTime
-            );
-        } else {
-            throw new IllegalArgumentException("Il faut renseigner soit (name et tag), soit puuid !");
+        final MatchlistService service = new MatchlistService(api, apiVersion);
+
+        return (puuid != null)
+                ? service.fetchMatchesByPuuid(region, platform, puuid, mode, map, size, start, startTime)
+                : service.fetchMatchesByNameTag(region, platform, name, tag, mode, map, size, start, startTime);
+    }
+
+    private void validateParameters() {
+        if ((name == null || tag == null) && puuid == null) {
+            throw new IllegalArgumentException("Name/Tag or PUUID must be set.");
+        }
+
+        if (region == null || platform == null) {
+            throw new IllegalArgumentException("Region and Platform must be set.");
         }
     }
 }

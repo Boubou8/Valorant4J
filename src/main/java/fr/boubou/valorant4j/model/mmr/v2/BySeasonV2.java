@@ -1,13 +1,11 @@
 package fr.boubou.valorant4j.model.mmr.v2;
 
 import lombok.Data;
-import org.checkerframework.checker.units.qual.N;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 14/01/2025 11:50
  */
 

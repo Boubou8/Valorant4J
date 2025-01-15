@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 14/01/2025 10:35
  */
 
@@ -34,10 +34,5 @@ public enum MatchMode {
             }
         }
         return UNKNOWN;
-    }
-
-    @Override
-    public String toString() {
-        return mode;
     }
 }

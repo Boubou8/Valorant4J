@@ -3,11 +3,10 @@ package fr.boubou.valorant4j.model.match;
 import fr.boubou.valorant4j.model.match.v4.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 import java.util.List;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 16/11/2024 19:23
  */
 

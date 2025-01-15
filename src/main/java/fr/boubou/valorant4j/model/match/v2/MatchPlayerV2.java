@@ -3,7 +3,7 @@ package fr.boubou.valorant4j.model.match.v2;
 import lombok.Data;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 10/01/2025 20:00
  */
 

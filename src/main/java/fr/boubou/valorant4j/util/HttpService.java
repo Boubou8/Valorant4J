@@ -9,7 +9,7 @@ import org.apache.hc.client5.http.fluent.Content;
 import org.apache.hc.client5.http.fluent.Request;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 10/11/2024 21:34
  */
 

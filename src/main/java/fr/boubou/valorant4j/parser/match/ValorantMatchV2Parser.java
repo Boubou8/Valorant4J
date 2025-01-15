@@ -9,7 +9,7 @@ import fr.boubou.valorant4j.parser.ValorantMatchParser;
 import java.io.IOException;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 16/11/2024 18:14
  */
 public class ValorantMatchV2Parser implements ValorantMatchParser {

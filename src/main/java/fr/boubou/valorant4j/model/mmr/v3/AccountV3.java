@@ -3,7 +3,7 @@ package fr.boubou.valorant4j.model.mmr.v3;
 import lombok.Data;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 14/01/2025 11:57
  */
 

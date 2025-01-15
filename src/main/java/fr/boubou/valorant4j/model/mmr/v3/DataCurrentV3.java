@@ -4,7 +4,7 @@ import lombok.Data;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 14/01/2025 12:01
  */
 

@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 11/01/2025 23:16
  */
 
@@ -30,8 +30,8 @@ public class ValorantPlayer {
         this.match = match;
         this.playerV2 = playerV2;
         this.playerV4 = playerV4;
-        this.hasV2 = (playerV2 != null);
-        this.hasV4 = (playerV4 != null);
+        this.hasV2 = playerV2 != null;
+        this.hasV4 = playerV4 != null;
     }
 
     public MatchPlayerV2 getV2() {

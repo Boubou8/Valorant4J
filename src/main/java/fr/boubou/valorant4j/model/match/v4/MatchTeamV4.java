@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 20/11/2024 17:54
  */
 

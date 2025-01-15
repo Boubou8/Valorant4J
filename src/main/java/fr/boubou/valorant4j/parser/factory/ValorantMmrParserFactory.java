@@ -6,7 +6,7 @@ import fr.boubou.valorant4j.parser.mmr.ValorantMmrV3Parser;
 import fr.boubou.valorant4j.util.ApiVersion;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 16/11/2024 18:15
  */
 public class ValorantMmrParserFactory {

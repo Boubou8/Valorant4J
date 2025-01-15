@@ -6,11 +6,10 @@ import fr.boubou.valorant4j.model.account.AccountBase;
 import fr.boubou.valorant4j.model.account.AccountV2;
 import fr.boubou.valorant4j.parser.ValorantAccountParser;
 import lombok.extern.slf4j.Slf4j;
-
 import java.io.IOException;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 16/11/2024 18:14
  */
 @Slf4j

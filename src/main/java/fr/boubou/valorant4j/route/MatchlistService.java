@@ -15,15 +15,14 @@ import fr.boubou.valorant4j.util.Endpoint;
 import fr.boubou.valorant4j.util.HttpService;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
-
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 /**
- * @author Lubin "Boubou" B.
- * @date 20/12/2024
+ * @author Boubou
+ * @date 20/12/2024 18:52
  */
 
 @Slf4j
@@ -37,14 +36,6 @@ public class MatchlistService extends Endpoint {
         this.httpService = new HttpService(api.getMaxRequestsPerMinute(), api.isRateLimitEnabled());
     }
 
-    // -------------------------------------------------------------------------
-    // Méthodes publiques simples (retournant ValorantMatchBase directement)
-    // Si tu en as besoin pour compatibilité, sinon on peut les rendre private.
-    // -------------------------------------------------------------------------
-
-    /**
-     * Récupérer la liste de ValorantMatchBase en V3/V4 par name/tag (sans query param).
-     */
     public List<MatchBase> fetchByNameTag(String region, String platform, String name, String tag) throws ApiException {
         String endpoint = version == ApiVersion.V3
                 ? String.format("%s/matches/%s/%s/%s", version.getVersion(), region, name, tag)
@@ -53,9 +44,6 @@ public class MatchlistService extends Endpoint {
         return fetchMatchListAsBase(endpoint);
     }
 
-    /**
-     * Récupérer la liste de ValorantMatchBase en V3/V4 par puuid (sans query param).
-     */
     public List<MatchBase> fetchByPUuid(String region, String platform, String puuid) throws ApiException {
         String endpoint = version == ApiVersion.V3
                 ? String.format("%s/by-puuid/matches/%s/%s", version.getVersion(), region, puuid)
@@ -64,13 +52,6 @@ public class MatchlistService extends Endpoint {
         return fetchMatchListAsBase(endpoint);
     }
 
-    // -------------------------------------------------------------------------
-    // Méthodes publiques "complètes" (avec query params)
-    // -------------------------------------------------------------------------
-
-    /**
-     * Fetch match history par name/tag, avec query params (mode, map, size, start).
-     */
     public List<ValorantMatch> fetchMatchesByNameTag(
             String region,
             String platform,
@@ -106,9 +87,6 @@ public class MatchlistService extends Endpoint {
         return filteredMatches;
     }
 
-    /**
-     * Fetch match history par puuid, avec query params (mode, map, size, start).
-     */
     public List<ValorantMatch> fetchMatchesByPuuid(
             String region,
             String platform,
@@ -147,9 +125,6 @@ public class MatchlistService extends Endpoint {
     // Méthodes privées pour factoriser la logique
     // -------------------------------------------------------------------------
 
-    /**
-     * Construit l'endpoint pour Name/Tag selon la version (V3 ou V4).
-     */
     private String buildNameTagEndpoint(String region, String platform, String name, String tag) {
         if (version == ApiVersion.V3) {
             return String.format("%s/matches/%s/%s/%s", version.getVersion(), region, name, tag);
@@ -159,9 +134,6 @@ public class MatchlistService extends Endpoint {
         }
     }
 
-    /**
-     * Construit l'endpoint pour PUUID selon la version (V3 ou V4).
-     */
     private String buildPuuidEndpoint(String region, String platform, String puuid) {
         if (version == ApiVersion.V3) {
             return String.format("%s/by-puuid/matches/%s/%s", version.getVersion(), region, puuid);
@@ -171,9 +143,6 @@ public class MatchlistService extends Endpoint {
         }
     }
 
-    /**
-     * Fait l'appel HTTP et renvoie une liste de ValorantMatchBase non agrégés.
-     */
     private List<MatchBase> fetchMatchListAsBase(String endpoint) throws ApiException {
         final String url = buildUrl(endpoint).replace(" ", "%20");
 
@@ -188,9 +157,6 @@ public class MatchlistService extends Endpoint {
         }
     }
 
-    /**
-     * Convertit une liste de ValorantMatchBase en liste de ValorantMatch (agrégation V2 / V4).
-     */
     private List<ValorantMatch> toAggregatedMatches(List<MatchBase> baseList) {
         List<ValorantMatch> aggregated = new ArrayList<>();
         for (MatchBase base : baseList) {

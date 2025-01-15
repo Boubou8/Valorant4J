@@ -10,12 +10,11 @@ import fr.boubou.valorant4j.ValorantAPI;
 import fr.boubou.valorant4j.exceptions.ApiException;
 import fr.boubou.valorant4j.util.HttpService;
 import lombok.extern.slf4j.Slf4j;
-
 import java.io.IOException;
 import java.util.Set;
 
 /**
- * @author Lubin "Boubou" B.
+ * @author Boubou
  * @date 10/11/2024 20:08
  */
 
@@ -36,7 +35,7 @@ public class AccountService extends Endpoint {
         return fetchAccount(String.format("%s/account/%s/%s", version.getVersion(), name, tag));
     }
 
-    public AccountBase fetchByPUuid(String puuid) throws ApiException {
+    public AccountBase fetchByPuuid(String puuid) throws ApiException {
         return fetchAccount(String.format("%s/by-puuid/account/%s", version.getVersion(), puuid));
     }
 
