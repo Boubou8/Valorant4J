@@ -54,6 +54,10 @@ public class ValorantPlayer {
         return (hasV2) ? playerV2.getTag() : (hasV4) ? playerV4.getTag() : null;
     }
 
+    public String getRank() {
+        return (hasV4) ? playerV4.getTier().getName() : null;
+    }
+
     public String getFullName() {
         return (hasV2) ? playerV2.getName() + "#" + playerV2.getTag() : (hasV4) ? playerV4.getName() + "#" + playerV4.getTag() : null;
     }
