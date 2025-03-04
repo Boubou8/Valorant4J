@@ -8,10 +8,7 @@ import fr.boubou.valorant4j.model.mmr_history.v1.MmrHistoryV1Entry;
 import fr.boubou.valorant4j.model.mmr_history.v2.MmrHistoryV2Entry;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -42,21 +39,23 @@ public class ValorantMmrHistory {
     }
 
     public List<MmrHistoryCombined> getHistoryList() {
-        List<MmrHistoryCombined> historyList = new ArrayList<>();
+        // Utiliser un LinkedHashMap pour garder un seul objet par match_id (évite les doublons)
+        Map<String, MmrHistoryCombined> historyMap = new LinkedHashMap<>();
 
         if (hasV1) {
-            historyList.addAll(mmrV1.getData().stream()
+            mmrV1.getData().stream()
                     .map(entry -> convertEntryToHistory(entry, mmrV1.getName(), mmrV1.getTag()))
-                    .collect(Collectors.toList()));
+                    .forEach(combined -> historyMap.put(combined.getMatch_id(), combined));
         }
 
         if (hasV2) {
-            historyList.addAll(mmrV2.getHistory().stream()
+            mmrV2.getHistory().stream()
                     .map(entry -> convertEntryToHistory(entry, mmrV2.getAccount().getName(), mmrV2.getAccount().getTag()))
-                    .collect(Collectors.toList()));
+                    .forEach(combined -> historyMap.put(combined.getMatch_id(), combined));
         }
 
-        // Trier la liste une seule fois (du plus récent au plus ancien)
+        // Transformer la map en liste et trier une seule fois
+        List<MmrHistoryCombined> historyList = new ArrayList<>(historyMap.values());
         historyList.sort(Comparator.comparing(MmrHistoryCombined::getDateAsLocalDateTime).reversed());
 
         return historyList.isEmpty() ? Collections.emptyList() : historyList;
