@@ -157,7 +157,7 @@ public class MatchlistService extends Endpoint {
         }
     }
 
-    private List<ValorantMatch> toAggregatedMatches(List<MatchBase> baseList) {
+    private @NotNull List<ValorantMatch> toAggregatedMatches(@NotNull List<MatchBase> baseList) {
         List<ValorantMatch> aggregated = new ArrayList<>();
         for (MatchBase base : baseList) {
             if (base instanceof MatchV2 v2) {

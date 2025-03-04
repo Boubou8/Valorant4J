@@ -14,7 +14,7 @@ import java.util.List;
 public class MatchMetadataV4 {
 
     private String match_id;
-    private MetadataMapV4 map;
+    private MatchMetadataMapV4 map;
     private String game_version;
     private int game_length_in_ms;
     private String started_at;
@@ -26,12 +26,6 @@ public class MatchMetadataV4 {
     private List<MetadataPartyRrPenaltysV4> party_rr_penaltys;
     private String region;
     private String cluster;
-
-    @Data
-    public static class MetadataMapV4 {
-        private String id;
-        private String name;
-    }
 
     @Data
     public static class MetadataQueueV4 {

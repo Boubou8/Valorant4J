@@ -6,13 +6,17 @@ import fr.boubou.valorant4j.exceptions.ApiException;
 import fr.boubou.valorant4j.model.ValorantAccount;
 import fr.boubou.valorant4j.model.ValorantMatch;
 import fr.boubou.valorant4j.model.ValorantMmr;
+import fr.boubou.valorant4j.model.ValorantMmrHistory;
 import fr.boubou.valorant4j.model.account.AccountV1;
 import fr.boubou.valorant4j.model.account.AccountV2;
 import fr.boubou.valorant4j.model.match.MatchBase;
 import fr.boubou.valorant4j.model.match.MatchV2;
 import fr.boubou.valorant4j.model.match.MatchV4;
+import fr.boubou.valorant4j.model.mmr_history.MmrHistoryV1;
+import fr.boubou.valorant4j.model.mmr_history.MmrHistoryV2;
 import fr.boubou.valorant4j.route.AccountService;
 import fr.boubou.valorant4j.route.MatchService;
+import fr.boubou.valorant4j.route.MmrHistoryService;
 import fr.boubou.valorant4j.util.ApiVersion;
 import lombok.Getter;
 import lombok.NonNull;
@@ -130,6 +134,19 @@ public class ValorantAPI {
                 .fetch(this);
     }
 
+    public ValorantMmrHistory fetchMmrHistoryByNameTag(@NonNull String region, @NonNull String platform, @NonNull String name, @NonNull String tag) throws ApiException {
+        final MmrHistoryV1 mmrHistoryV1 = (MmrHistoryV1) new MmrHistoryService(this, ApiVersion.V1).fetchByNameTag(region, platform, name, tag);
+        final MmrHistoryV2 mmrHistoryV2 = (MmrHistoryV2) new MmrHistoryService(this, ApiVersion.V2).fetchByNameTag(region, platform, name, tag);
+
+        return new ValorantMmrHistory(mmrHistoryV1, mmrHistoryV2);
+    }
+
+    public ValorantMmrHistory fetchMmrHistoryByPuuid(@NonNull String region, @NonNull String platform, @NonNull String puuid) throws ApiException {
+        final MmrHistoryV1 mmrHistoryV1 = (MmrHistoryV1) new MmrHistoryService(this, ApiVersion.V1).fetchByPuuid(region, platform, puuid);
+        final MmrHistoryV2 mmrHistoryV2 = (MmrHistoryV2) new MmrHistoryService(this, ApiVersion.V2).fetchByPuuid(region, platform, puuid);
+
+        return new ValorantMmrHistory(mmrHistoryV1, mmrHistoryV2);
+    }
 
     public MatchHistoryBuilder matchHistoryBuilder() {
         return new MatchHistoryBuilder();
