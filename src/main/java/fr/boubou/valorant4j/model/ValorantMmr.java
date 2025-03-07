@@ -10,8 +10,8 @@ import lombok.Getter;
  */
 public class ValorantMmr {
 
-    private MmrV2 mmrV2;
-    private MmrV3 mmrV3;
+    private final MmrV2 mmrV2;
+    private final MmrV3 mmrV3;
 
     @Getter private boolean hasV2;
     @Getter private boolean hasV3;
@@ -64,17 +64,34 @@ public class ValorantMmr {
         }
     }
 
-    public int getPeakRankTier() {
-        if (hasV2) {
-            return mmrV2.getHighest_rank().getTier();
+    public int getPeakRating() {
+        if (hasV3) {
+            assert mmrV3.getPeak() != null;
+            return mmrV3.getPeak().getRr();
         } else {
-            if (hasV3) {
-                assert mmrV3.getPeak() != null;
-                return mmrV3.getPeak().getTier().getId();
-            } else {
-                return -1;
-            }
+            return -1;
         }
+    }
+
+    public boolean hasProtectionShield() {
+        return hasV3 && mmrV3.getCurrent().getRank_protection_shields() > 0;
+    }
+
+    public int getProtectionShield() {
+        return hasV3 ? mmrV3.getCurrent().getRank_protection_shields() : 0;
+    }
+
+    public int getPeakRankTier() {
+        if (hasV3) {
+            assert mmrV3.getPeak() != null;
+            return mmrV3.getPeak().getRr();
+        } else {
+            return -1;
+        }
+    }
+
+    public String getPeakRankFormatted() {
+        return "%s / %dRR".formatted(getPeakRank(), getPeakRating());
     }
 
     public String getRankFormatted() {

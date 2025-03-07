@@ -17,6 +17,7 @@ public class BySeasonV3 {
     private int wins;
     private int games;
     private DataPeakTierV3 end_tier;
+    private int end_rr;
     private String ranking_schema;
     @Nullable private CurrentLeaderboardV3 leaderboard_placement;
     private List<DataPeakTierV3> act_wins;

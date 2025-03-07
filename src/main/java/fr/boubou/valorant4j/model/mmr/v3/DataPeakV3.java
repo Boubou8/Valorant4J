@@ -13,4 +13,5 @@ public class DataPeakV3 {
     private SeasonIdShortComboV3 season;
     private String ranking_schema;
     private DataPeakTierV3 tier;
+    private int rr;
 }

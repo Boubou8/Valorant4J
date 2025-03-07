@@ -20,4 +20,6 @@ public class MmrHistoryV2Entry extends MmrHistoryEntryBase {
     private SeasonIdShortComboV3 season;
     private int rr;
     private int last_change;
+    private int refunded_rr;
+    private boolean was_derank_protected;
 }

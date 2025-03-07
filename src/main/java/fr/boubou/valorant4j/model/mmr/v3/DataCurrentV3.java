@@ -16,5 +16,6 @@ public class DataCurrentV3 {
     private int last_change;
     private int elo;
     private int games_needed_for_rating;
+    private int rank_protection_shields;
     @Nullable private CurrentLeaderboardV3 leaderboard_placement;
 }
