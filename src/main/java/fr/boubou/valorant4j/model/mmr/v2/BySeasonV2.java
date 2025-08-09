@@ -42,9 +42,9 @@ public class BySeasonV2 {
     private BySeason e10a1;
     @Nullable private BySeason e10a2;
     @Nullable private BySeason e10a3;
-    @Nullable private BySeason e11aIV;
-    @Nullable private BySeason e11aV;
-    @Nullable private BySeason e11aVI;
+    @Nullable private BySeason e11a4;
+    @Nullable private BySeason e11a5;
+    @Nullable private BySeason e11a6;
 
     @Data
     public static class BySeason {
