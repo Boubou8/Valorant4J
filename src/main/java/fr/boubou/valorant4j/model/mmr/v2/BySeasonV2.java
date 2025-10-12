@@ -1,5 +1,6 @@
 package fr.boubou.valorant4j.model.mmr.v2;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  */
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BySeasonV2 {
 
     private BySeason e1a1;
@@ -42,9 +44,9 @@ public class BySeasonV2 {
     private BySeason e10a1;
     @Nullable private BySeason e10a2;
     @Nullable private BySeason e10a3;
-    @Nullable private BySeason e11a4;
-    @Nullable private BySeason e11a5;
-    @Nullable private BySeason e11a6;
+    @Nullable private BySeason e10a4;
+    @Nullable private BySeason e10a5;
+    @Nullable private BySeason e10a6;
 
     @Data
     public static class BySeason {
