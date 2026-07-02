@@ -26,7 +26,7 @@ public class MatchService extends Endpoint {
 
     public MatchService(ValorantAPI api, ApiVersion version) {
         super(api, version, SUPPORTED_VERSIONS, "valorant/match");
-        this.httpService = new HttpService(api.getRateLimit().getMaxRequestsPerMinute(), api.getRateLimit().isEnabled());
+        this.httpService = new HttpService(api.getRateLimit().maxRequestsPerMinute(), api.getRateLimit().enabled());
     }
 
     public MatchBase fetchByMatchId(String matchId) throws ApiException {

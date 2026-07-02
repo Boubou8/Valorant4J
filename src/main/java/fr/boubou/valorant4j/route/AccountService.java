@@ -28,7 +28,7 @@ public class AccountService extends Endpoint {
 
     public AccountService(ValorantAPI api, ApiVersion version) {
         super(api, version, SUPPORTED_VERSIONS, "valorant/account");
-        this.httpService = new HttpService(api.getRateLimit().getMaxRequestsPerMinute(), api.getRateLimit().isEnabled());
+        this.httpService = new HttpService(api.getRateLimit().maxRequestsPerMinute(), api.getRateLimit().enabled());
     }
 
     public AccountBase fetchByNameTag(String name, String tag) throws ApiException {

@@ -10,9 +10,7 @@ import fr.boubou.valorant4j.util.ApiVersion;
 import fr.boubou.valorant4j.util.Endpoint;
 import fr.boubou.valorant4j.util.HttpService;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.A;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -27,7 +25,7 @@ public class MmrHistoryService extends Endpoint {
 
     public MmrHistoryService(ValorantAPI api, ApiVersion version) {
         super(api, version, SUPPORTED_VERSIONS, "valorant/mmr-history");
-        this.httpService = new HttpService(api.getRateLimit().getMaxRequestsPerMinute(), api.getRateLimit().isEnabled());
+        this.httpService = new HttpService(api.getRateLimit().maxRequestsPerMinute(), api.getRateLimit().enabled());
     }
 
     public MmrHistoryBase fetchByNameTag(String region, String platform, String name, String tag) throws ApiException {

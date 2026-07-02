@@ -18,11 +18,11 @@ import fr.boubou.valorant4j.route.AccountService;
 import fr.boubou.valorant4j.route.MatchService;
 import fr.boubou.valorant4j.route.MmrHistoryService;
 import fr.boubou.valorant4j.util.ApiVersion;
+
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,19 +41,58 @@ public class ValorantAPI {
     private final String apiKey;
     private final RateLimitConfig rateLimit;
 
-    public ValorantAPI(String apiKey) {
-        this(apiKey, RateLimitPreset.DEFAULT);
-    }
-
-    public ValorantAPI(String apiKey, @NotNull RateLimitPreset preset) {
-        this(apiKey, preset.getConfig());
-    }
-
-    public ValorantAPI(String apiKey, RateLimitConfig config) {
-
+    private ValorantAPI(String apiKey, RateLimitConfig rateLimit) {
         this.apiKey = Objects.requireNonNull(apiKey);
-        this.rateLimit = Objects.requireNonNull(config);
+        this.rateLimit = Objects.requireNonNull(rateLimit);
+    }
 
+    public static @NotNull Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private String apiKey;
+
+        private RateLimitConfig rateLimit = RateLimitPreset.DEFAULT.getConfig();
+
+        public Builder apiKey(String apiKey) {
+            this.apiKey = Objects.requireNonNull(apiKey);
+            return this;
+        }
+
+        public Builder rateLimit(@NotNull RateLimitPreset preset) {
+            this.rateLimit = preset.getConfig();
+            return this;
+        }
+
+        public Builder rateLimit(@NotNull RateLimitConfig config) {
+            this.rateLimit = config;
+            return this;
+        }
+
+        public Builder rateLimit(int maxRequestsPerMinute) {
+            this.rateLimit = new RateLimitConfig(maxRequestsPerMinute, true);
+            return this;
+        }
+
+        public Builder noRateLimit() {
+            this.rateLimit = RateLimitPreset.DISABLED.getConfig();
+            return this;
+        }
+
+        public Builder from(@NotNull ValorantAPI api) {
+            this.apiKey = api.getApiKey();
+            this.rateLimit = api.getRateLimit();
+            return this;
+        }
+
+        public @NotNull ValorantAPI build() {
+
+            Objects.requireNonNull(apiKey, "API key cannot be null");
+            Objects.requireNonNull(rateLimit, "Rate limit config cannot be null");
+
+            return new ValorantAPI(apiKey, rateLimit);
+        }
     }
 
     public ValorantAccount fetchAccountByNameTag(String name, String tag) throws ApiException {
@@ -146,5 +185,12 @@ public class ValorantAPI {
 
     public MmrRequestBuilder mmrRequestBuilder() {
         return new MmrRequestBuilder();
+    }
+
+    @Override
+    public String toString() {
+        return "ValorantAPI{" +
+                "rateLimit=" + rateLimit +
+                '}';
     }
 }

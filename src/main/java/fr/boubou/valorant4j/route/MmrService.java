@@ -23,7 +23,7 @@ public class MmrService extends Endpoint {
 
     public MmrService(ValorantAPI api, ApiVersion version) {
         super(api, version, SUPPORTED_VERSIONS, "valorant/mmr");
-        this.httpService = new HttpService(api.getRateLimit().getMaxRequestsPerMinute(), api.getRateLimit().isEnabled());
+        this.httpService = new HttpService(api.getRateLimit().maxRequestsPerMinute(), api.getRateLimit().enabled());
     }
 
     public MmrBase fetch(MmrRequestBuilder builder) throws ApiException {

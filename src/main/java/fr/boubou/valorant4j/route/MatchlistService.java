@@ -33,7 +33,7 @@ public class MatchlistService extends Endpoint {
 
     public MatchlistService(ValorantAPI api, ApiVersion version) {
         super(api, version, SUPPORTED_VERSIONS, "valorant/matches");
-        this.httpService = new HttpService(api.getRateLimit().getMaxRequestsPerMinute(), api.getRateLimit().isEnabled());
+        this.httpService = new HttpService(api.getRateLimit().maxRequestsPerMinute(), api.getRateLimit().enabled());
     }
 
     public List<MatchBase> fetchByNameTag(String region, String platform, String name, String tag) throws ApiException {
