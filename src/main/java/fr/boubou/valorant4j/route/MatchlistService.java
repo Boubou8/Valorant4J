@@ -33,7 +33,7 @@ public class MatchlistService extends Endpoint {
 
     public MatchlistService(ValorantAPI api, ApiVersion version) {
         super(api, version, SUPPORTED_VERSIONS, "valorant/matches");
-        this.httpService = new HttpService(api.getMaxRequestsPerMinute(), api.isRateLimitEnabled());
+        this.httpService = new HttpService(api.getRateLimit().getMaxRequestsPerMinute(), api.getRateLimit().isEnabled());
     }
 
     public List<MatchBase> fetchByNameTag(String region, String platform, String name, String tag) throws ApiException {
@@ -57,7 +57,7 @@ public class MatchlistService extends Endpoint {
             String platform,
             String name,
             String tag,
-            MatchMode mode,
+            @NotNull MatchMode mode,
             String map,
             Integer size,
             Integer start,
@@ -91,7 +91,7 @@ public class MatchlistService extends Endpoint {
             String region,
             String platform,
             String puuid,
-            MatchMode mode,
+            @NotNull MatchMode mode,
             String map,
             Integer size,
             Integer start,
@@ -125,7 +125,7 @@ public class MatchlistService extends Endpoint {
     // Méthodes privées pour factoriser la logique
     // -------------------------------------------------------------------------
 
-    private String buildNameTagEndpoint(String region, String platform, String name, String tag) {
+    private @NotNull String buildNameTagEndpoint(String region, String platform, String name, String tag) {
         if (version == ApiVersion.V3) {
             return String.format("%s/matches/%s/%s/%s", version.getVersion(), region, name, tag);
         } else {
@@ -134,7 +134,7 @@ public class MatchlistService extends Endpoint {
         }
     }
 
-    private String buildPuuidEndpoint(String region, String platform, String puuid) {
+    private @NotNull String buildPuuidEndpoint(String region, String platform, String puuid) {
         if (version == ApiVersion.V3) {
             return String.format("%s/by-puuid/matches/%s/%s", version.getVersion(), region, puuid);
         } else {

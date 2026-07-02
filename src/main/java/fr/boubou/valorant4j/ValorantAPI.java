@@ -23,9 +23,11 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Boubou
@@ -33,35 +35,25 @@ import java.util.List;
  */
 
 @Slf4j
-@RequiredArgsConstructor
 @Getter
-@Setter
 public class ValorantAPI {
 
-    private String apiKey;
-    private int maxRequestsPerMinute;
-    private boolean rateLimitEnabled;
+    private final String apiKey;
+    private final RateLimitConfig rateLimit;
 
     public ValorantAPI(String apiKey) {
-        this.apiKey = apiKey;
-        this.maxRequestsPerMinute = 30;
-        this.rateLimitEnabled = true;
+        this(apiKey, RateLimitPreset.DEFAULT);
     }
 
-    public ValorantAPI setMaxRateLimit(int maxRequestsPerMinute) {
-        this.maxRequestsPerMinute = maxRequestsPerMinute;
-        return this;
+    public ValorantAPI(String apiKey, @NotNull RateLimitPreset preset) {
+        this(apiKey, preset.getConfig());
     }
 
-    public ValorantAPI manageRateLimit(boolean rateLimitEnabled) {
-        this.rateLimitEnabled = rateLimitEnabled;
-        return this;
-    }
+    public ValorantAPI(String apiKey, RateLimitConfig config) {
 
-    public ValorantAPI setRateLimiter(int maxRequestsPerMinute, boolean rateLimitEnabled) {
-        this.maxRequestsPerMinute = maxRequestsPerMinute;
-        this.rateLimitEnabled = rateLimitEnabled;
-        return this;
+        this.apiKey = Objects.requireNonNull(apiKey);
+        this.rateLimit = Objects.requireNonNull(config);
+
     }
 
     public ValorantAccount fetchAccountByNameTag(String name, String tag) throws ApiException {

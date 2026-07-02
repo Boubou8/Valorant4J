@@ -27,7 +27,7 @@ public class MmrHistoryService extends Endpoint {
 
     public MmrHistoryService(ValorantAPI api, ApiVersion version) {
         super(api, version, SUPPORTED_VERSIONS, "valorant/mmr-history");
-        this.httpService = new HttpService(api.getMaxRequestsPerMinute(), api.isRateLimitEnabled());
+        this.httpService = new HttpService(api.getRateLimit().getMaxRequestsPerMinute(), api.getRateLimit().isEnabled());
     }
 
     public MmrHistoryBase fetchByNameTag(String region, String platform, String name, String tag) throws ApiException {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import fr.boubou.valorant4j.ValorantAPI;
 import fr.boubou.valorant4j.exceptions.ApiException;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public  class Endpoint {
     @Getter
     protected final Set<ApiVersion> supportedVersions;
 
-    protected Endpoint(ValorantAPI api, ApiVersion version, Set<ApiVersion> supportedVersions, String endpointPath) {
+    protected Endpoint(ValorantAPI api, ApiVersion version, @NotNull Set<ApiVersion> supportedVersions, String endpointPath) {
         this.api = api;
         this.version = version;
         this.endpointPath = endpointPath;
@@ -34,7 +35,7 @@ public  class Endpoint {
 
         if (!supportedVersions.contains(version)) {
             throw new UnsupportedOperationException(
-                    String.format("Version %s is not supported by Henrick's API endpoint: %s. (Supported versions: %s)",
+                    String.format("Version %s is not supported by Henrik's API endpoint: %s. (Supported versions: %s)",
                             version.getVersion(),
                             endpointPath,
                             supportedVersions));
@@ -50,8 +51,8 @@ public  class Endpoint {
         return api;
     }
 
-    protected void handleApiError(JsonNode response) throws ApiException {
+    protected void handleApiError(@NotNull JsonNode response) throws ApiException {
         String message = response.path("message").asText();
-        throw new ApiException("Henrick's API error: " + message);
+        throw new ApiException("Henrik's API error: " + message);
     }
 }
