@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.boubou.valorant4j.model.match.MatchBase;
 import fr.boubou.valorant4j.model.match.MatchV2;
 import fr.boubou.valorant4j.parser.ValorantMatchParser;
+import fr.boubou.valorant4j.util.ObjectMapperProvider;
 
 import java.io.IOException;
 
@@ -16,7 +17,7 @@ public class ValorantMatchV2Parser implements ValorantMatchParser {
 
     @Override
     public MatchBase parse(JsonNode data) throws IOException {
-        final ObjectMapper mapper = new ObjectMapper();
+        final ObjectMapper mapper = ObjectMapperProvider.getObjectMapper();
         return mapper.treeToValue(data, MatchV2.class);
     }
 }

@@ -23,6 +23,7 @@ public class MatchMetadataV4 {
     private MetadataSeasonV4 season;
     private String platform;
     @Nullable private Object premier;
+    @Nullable private MatchRoundPlayerV4 mvp;
     private List<MetadataPartyRrPenaltysV4> party_rr_penaltys;
     private String region;
     private String cluster;

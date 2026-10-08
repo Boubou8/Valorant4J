@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.boubou.valorant4j.model.account.AccountBase;
 import fr.boubou.valorant4j.model.account.AccountV2;
 import fr.boubou.valorant4j.parser.ValorantAccountParser;
+import fr.boubou.valorant4j.util.ObjectMapperProvider;
 import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
@@ -17,7 +18,7 @@ public class ValorantAccountV2Parser implements ValorantAccountParser {
 
     @Override
     public AccountBase parse(JsonNode data) throws IOException {
-        final ObjectMapper mapper = new ObjectMapper();
+        final ObjectMapper mapper = ObjectMapperProvider.getObjectMapper();
         return mapper.treeToValue(data, AccountV2.class);
     }
 }

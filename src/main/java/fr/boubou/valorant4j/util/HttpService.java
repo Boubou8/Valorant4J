@@ -1,7 +1,6 @@
 package fr.boubou.valorant4j.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.boubou.valorant4j.exceptions.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.client5.http.HttpResponseException;
@@ -38,7 +37,7 @@ public class HttpService {
                     .execute().returnContent();
 
             log.debug("Parsing response");
-            return new ObjectMapper().readTree(content.asString());
+            return ObjectMapperProvider.getObjectMapper().readTree(content.asString());
 
         } catch (HttpResponseException e) {
 
