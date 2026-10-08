@@ -1,5 +1,6 @@
 package fr.boubou.valorant4j.model.mmr.v3;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,5 +18,7 @@ public class DataCurrentV3 {
     private int elo;
     private int games_needed_for_rating;
     private int rank_protection_shields;
+    @JsonProperty("is_at_rank_protected_tier")
+    private boolean atRankProtectedTier;
     @Nullable private CurrentLeaderboardV3 leaderboard_placement;
 }

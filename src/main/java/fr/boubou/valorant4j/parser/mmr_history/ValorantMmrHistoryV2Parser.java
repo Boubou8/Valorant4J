@@ -8,6 +8,7 @@ import fr.boubou.valorant4j.model.mmr_history.MmrHistoryBase;
 import fr.boubou.valorant4j.model.mmr_history.MmrHistoryV2;
 import fr.boubou.valorant4j.parser.ValorantMatchlistParser;
 import fr.boubou.valorant4j.parser.ValorantMmrHistoryParser;
+import fr.boubou.valorant4j.util.ObjectMapperProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +24,7 @@ public class ValorantMmrHistoryV2Parser implements ValorantMmrHistoryParser {
 
     @Override
     public MmrHistoryBase parse(@NotNull JsonNode data) throws IOException {
-        final ObjectMapper mapper = new ObjectMapper();
+        final ObjectMapper mapper = ObjectMapperProvider.getObjectMapper();
         return mapper.treeToValue(data, MmrHistoryV2.class);
     }
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.boubou.valorant4j.model.match.MatchBase;
 import fr.boubou.valorant4j.model.match.MatchV2;
 import fr.boubou.valorant4j.parser.ValorantMatchlistParser;
+import fr.boubou.valorant4j.util.ObjectMapperProvider;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class ValorantMatchlistV3Parser implements ValorantMatchlistParser {
 
     @Override
     public List<MatchBase> parse(JsonNode data) throws IOException {
-        final ObjectMapper mapper = new ObjectMapper();
+        final ObjectMapper mapper = ObjectMapperProvider.getObjectMapper();
         List<MatchBase> matches = new ArrayList<>();
 
         for (JsonNode matchNode : data) {

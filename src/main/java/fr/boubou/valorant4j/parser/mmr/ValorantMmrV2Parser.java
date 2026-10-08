@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.boubou.valorant4j.model.mmr.MmrBase;
 import fr.boubou.valorant4j.model.mmr.MmrV2;
 import fr.boubou.valorant4j.parser.ValorantMmrParser;
+import fr.boubou.valorant4j.util.ObjectMapperProvider;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class ValorantMmrV2Parser implements ValorantMmrParser {
 
     @Override
     public MmrBase parse(JsonNode data) throws IOException {
-        final ObjectMapper mapper = new ObjectMapper();
+        final ObjectMapper mapper = ObjectMapperProvider.getObjectMapper();
         return mapper.treeToValue(data, MmrV2.class);
     }
 }

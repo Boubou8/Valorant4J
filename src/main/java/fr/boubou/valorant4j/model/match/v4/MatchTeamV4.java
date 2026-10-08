@@ -16,6 +16,7 @@ public class MatchTeamV4 {
     private String team_id;
     private MatchTeamRoundsV4 rounds;
     private boolean won;
+    @Nullable private MatchRoundPlayerV4 mvp;
     @Nullable private MatchTeamRosterV4 premier_roster;
 
     @Data
