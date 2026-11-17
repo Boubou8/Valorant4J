@@ -57,7 +57,7 @@ public class MatchlistService extends Endpoint {
             String platform,
             String name,
             String tag,
-            @NotNull MatchMode mode,
+            MatchMode mode,
             String map,
             Integer size,
             Integer start,
@@ -67,7 +67,7 @@ public class MatchlistService extends Endpoint {
         String endpoint = buildNameTagEndpoint(region, platform, name, tag);
 
         // 2) Ajouter la query string
-        endpoint = addQueryParameters(endpoint, mode.toString().toLowerCase(), map, size, start);
+        endpoint = addQueryParameters(endpoint, mode != null ? mode.getMode() : null, map, size, start);
 
         // 3) Récupérer la liste de ValorantMatchBase
         List<MatchBase> baseList = fetchMatchListAsBase(endpoint);
@@ -91,7 +91,7 @@ public class MatchlistService extends Endpoint {
             String region,
             String platform,
             String puuid,
-            @NotNull MatchMode mode,
+            MatchMode mode,
             String map,
             Integer size,
             Integer start,
@@ -101,7 +101,7 @@ public class MatchlistService extends Endpoint {
         String endpoint = buildPuuidEndpoint(region, platform, puuid);
 
         // 2) Ajouter la query string
-        endpoint = addQueryParameters(endpoint, mode.toString().toLowerCase(), map, size, start);
+        endpoint = addQueryParameters(endpoint, mode != null ? mode.getMode() : null, map, size, start);
 
         // 3) Récupérer la liste de ValorantMatchBase
         List<MatchBase> baseList = fetchMatchListAsBase(endpoint);
